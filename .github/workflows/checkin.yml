@@ -1,0 +1,22 @@
+name: GLaDOS Checkin
+
+on:
+  workflow_dispatch: # 手动运行
+  schedule:
+    - cron: '30 0 * * *' # 每天北京时间 08:30 自动签到
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: GLaDOS Checkin
+        run: |
+          curl 'https://glados.rocks/api/user/checkin' \
+          -H 'cookie: ${{ secrets.GLADOS_COOKIE }}' \
+          -H 'content-type: application/json;charset=UTF-8' \
+          -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' \
+          --data-raw '{"token":"glados.network"}' \
+          --compressed
