@@ -1,9 +1,9 @@
 name: GLaDOS Checkin
 
 on:
-  workflow_dispatch: # 手动运行
+  workflow_dispatch: 
   schedule:
-    - cron: '30 0 * * *' # 每天北京时间 08:30 自动签到
+    - cron: '0 21 * * *' # 每天北京时间 05:00 触发，确保 9 点前完成
 
 jobs:
   build:
